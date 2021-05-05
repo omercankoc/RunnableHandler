@@ -2,6 +2,8 @@ package com.omercankoc.runnablehandler
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -16,6 +18,9 @@ class RunnableHandlerActivity : AppCompatActivity() {
     private var hour : Int = 0
     private var minute : Int = 0
     private var second : Int = 0
+
+    var runnable : Runnable = Runnable {  }
+    var handler : Handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,10 +59,23 @@ class RunnableHandlerActivity : AppCompatActivity() {
     }
 
     fun start(view : View){
+        runnable = object : Runnable {
+            override fun run() {
+                time += 1
+                timer(time)
+                handler.postDelayed(this,1000)
+            }
 
+        }
+        handler.post(runnable)
     }
 
     fun stop(view : View){
-
+        handler.removeCallbacks(runnable)
+        time = 0
+        hour = 0
+        minute = 0
+        second = 0
+        timer(time)
     }
 }
