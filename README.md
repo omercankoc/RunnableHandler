@@ -15,6 +15,7 @@ private var second : Int = 0
 var runnable : Runnable = Runnable {  }
 var handler : Handler = Handler(Looper.getMainLooper())
 ```
+
 ### Starting the Runnable and Handler:
 ```kotlin
 runnable = object : Runnable {
@@ -26,6 +27,7 @@ runnable = object : Runnable {
 }
 handler.post(runnable)
 ```
+
 ### Stop Runnable and Handler:
 ```kotlin
 handler.removeCallbacks(runnable)
@@ -35,6 +37,7 @@ minute = 0
 second = 0
 timer(time)
 ```
+
 ### Timer Function:
 ```kotlin
 private fun timer(time: Int){
@@ -63,6 +66,4 @@ private fun timer(time: Int){
         print("$hour:$minute:$second")
     }
 }
-
-
 ```
